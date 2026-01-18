@@ -1,0 +1,14 @@
+[core]
+    remote = minio-data
+['remote "minio"']
+    url = s3://data
+['remote "minio-models"']
+    url = s3://models
+    endpointurl = http://localhost:9000
+    access_key_id = admin
+    secret_access_key = 12345678
+['remote "minio-data"']
+    url = s3://data
+    endpointurl = http://localhost:9000
+    access_key_id = admin
+    secret_access_key = 12345678
