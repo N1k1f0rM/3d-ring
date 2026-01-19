@@ -24,5 +24,6 @@ models/
 #temporary
 README.md
 
-
+#pg
 postgres/data/
+infra/postgres/data
