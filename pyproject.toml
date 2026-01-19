@@ -63,15 +63,3 @@ exclude = [
   "dist",
   "*.egg-info",
 ]
-
-[tool.mypy]
-python_version = "3.12"
-warn_return_any = true
-warn_unused_configs = true
-ignore_missing_imports = true
-exclude = [
-  "^frontend/",
-  "^node_modules/",
-  "^\.venv/",
-  "^venv/",
-]
