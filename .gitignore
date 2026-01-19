@@ -23,3 +23,6 @@ models/
 
 #temporary
 README.md
+
+
+postgres/data/
