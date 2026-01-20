@@ -14,7 +14,7 @@ done
 
 echo "Создание бакетов..."
 
-for bucket in data models; do
+for bucket in data models mlflow-bucket; do
     if mc ls local/${bucket} 2>/dev/null; then
         echo "Бакет ${bucket} уже существует"
     else
