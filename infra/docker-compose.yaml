@@ -17,9 +17,10 @@ services:
       - ./minio/data:/minio/data
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
-      interval: 30s
-      timeout: 20s
+      interval: 10s
+      timeout: 10s
       retries: 3
+      start_period: 50s
 
   minio-init:
     image: minio/mc
@@ -48,13 +49,13 @@ services:
     healthcheck:
       test: ["CMD", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
       interval: 5s
-      retries: 5
-      start_period: 25s
+      retries: 10
+      start_period: 50s
     restart: always
 
   mlflow:
     image: ghcr.io/mlflow/mlflow:v2.15.1
-    environment: 
+    environment:
       MLFLOW_S3_ENDPOINT_URL: "http://minio:9000"
       AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
       AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
@@ -62,26 +63,26 @@ services:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: ${POSTGRES_DB}
-    command: 
+    command:
       - bash
       - -c
       - |
-        pip install boto3 --quiet
+        pip install boto3 psycopg2-binary --quiet
         python -c "
         import boto3
         import os
         from urllib.parse import urlparse
-          
+
         aws_access_key = os.getenv('AWS_ACCESS_KEY_ID')
         aws_secret_key = os.getenv('AWS_SECRET_ACCESS_KEY')
-          
-        s3 = boto3.client('s3', 
-                          endpoint_url = 'http://minio:9000', 
+
+        s3 = boto3.client('s3',
+                          endpoint_url = 'http://minio:9000',
                           aws_access_key_id=aws_access_key,
                           aws_secret_access_key=aws_secret_key)
-          
+
         bucket = 'mlflow-bucket'
-          
+
         try:
             s3.head_bucket(Bucket=bucket)
             print(f'Bucket {bucket} exists')
@@ -90,16 +91,19 @@ services:
             print(f'Bucket {bucket} created')
         "
         mlflow server --host 0.0.0.0 \
-            --default-artifact-root s3://mlflow-bucket --serve-artifacts
+                      --default-artifact-root s3://mlflow-bucket \
+                      --backend-store-uri postgresql://$POSTGRES_USER:$POSTGRES_PASSWORD@postgres/$POSTGRES_DB \
+                      --serve-artifacts
+
     ports:
       - "5050:5000"
     volumes:
       - ./mlflow/artifacts:/mlflow/artifacts
-    depends_on:
-      minio:
-        condition: service_healthy
-      postgres:
-        condition: service_healthy
+    # depends_on:
+    #   minio:
+    #     condition: service_healthy
+    #   postgres:
+    #     condition: service_healthy
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:5000/healthy"]
