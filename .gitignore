@@ -16,8 +16,6 @@ wheels/
 infra/minio/data/
 .dvc/tmp
 .dvc/cache
-models/
-
 
 #temporary
 README.md
@@ -26,3 +24,6 @@ README.md
 postgres/data/
 infra/postgres/data
 /data
+
+#models
+models/OpenLRM/openlrm_basic
