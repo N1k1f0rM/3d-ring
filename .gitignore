@@ -17,8 +17,6 @@ infra/minio/data/
 .dvc/tmp
 .dvc/cache
 models/
-/data
-/models
 
 
 #temporary
@@ -27,3 +25,9 @@ README.md
 #pg
 postgres/data/
 infra/postgres/data
+
+#airflow
+infra/airflow/config
+infra/airflow/dags
+infra/airflow/logs
+infra/airflow/plugins
