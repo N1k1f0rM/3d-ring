@@ -12,13 +12,13 @@ do
 done
 
 
-echo "Создание бакетов..."
+echo "Creating buckets"
 
-for bucket in data models mlflow-bucket; do
+for bucket in data models mlflow-bucket sd-res ben2 hunyuan; do
     if mc ls local/${bucket} 2>/dev/null; then
-        echo "Бакет ${bucket} уже существует"
+        echo "Already exists ${bucket}"
     else
         mc mb local/${bucket} --region=ru-1
-        echo "Создан бакет: ${bucket}"
+        echo "Create ${bucket}"
     fi
 done

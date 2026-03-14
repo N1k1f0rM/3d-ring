@@ -20,12 +20,17 @@ x-airflow-common:
     MLFLOW_S3_ENDPOINT_URL: http://minio:9000
     MLFLOW_TRACKING_URI: http://mlflow:5000
     AIRFLOW_POSTGRES_DB: ${AIRFLOW_POSTGRES_DB}
+    POSTGRES_USER: ${POSTGRES_USER}
+    POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    POSTGRES_DB: ${POSTGRES_DB}
+    PYTHONPATH: /opt/airflow/project:/opt/openlrm
   volumes:
   - ${AIRFLOW_PROJ_DIR:-.}/dags:/opt/airflow/dags
   - ${AIRFLOW_PROJ_DIR}/logs:/opt/airflow/logs
   - ${AIRFLOW_PROJ_DIR}/plugins:/opt/airflow/plugins
   - ${AIRFLOW_PROJ_DIR}/config:/opt/airflow/config
   - /var/run/docker.sock:/var/run/docker.sock
+  - ../:/opt/airflow/project
   user: "0:0" #${AIRFLOW_UID}
   depends_on:
     &airflow-common-depends-on
@@ -185,6 +190,13 @@ services:
     depends_on:
       <<: *airflow-common-depends-on
     restart: "no"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
 
   airflow-webserver:
     <<: *airflow-common
@@ -202,6 +214,13 @@ services:
       <<: *airflow-common-depends-on
       airflow-init:
         condition: service_completed_successfully
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
 
   airflow-scheduler:
     <<: *airflow-common
@@ -217,6 +236,13 @@ services:
       <<: *airflow-common-depends-on
       airflow-init:
         condition: service_completed_successfully
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
 
 volumes:
   minio-storage:

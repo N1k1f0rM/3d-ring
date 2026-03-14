@@ -17,7 +17,7 @@ infra/minio/data/
 .dvc/tmp
 .dvc/cache
 models/
-
+data/images
 
 #temporary
 README.md
@@ -28,6 +28,22 @@ infra/postgres/data
 
 #airflow
 infra/airflow/config
-infra/airflow/dags
+# infra/airflow/dags
 infra/airflow/logs
 infra/airflow/plugins
+
+data/en-suite-2k.hdr
+data/en-suite-4k.hdr
+
+
+#tests
+.mypy_cache
+
+configs/
+experiments/
+exps/
+results/
+src/
+train/
+
+infra/mlflow/artifacts

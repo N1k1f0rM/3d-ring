@@ -1,14 +1,14 @@
 #!/bin/bash
 set -e
 
-echo "=== Airflow Init Script ==="
+python /sources/generate_json.py
 
+echo "=== Airflow Init ==="
 python << END
 import os
 import psycopg2
 from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
 
-# Параметры подключения к стандартной базе postgres
 conn = psycopg2.connect(
     host="postgres",
     user=os.environ["POSTGRES_USER"],
@@ -26,7 +26,7 @@ if not exists:
     print(f"Creating database '{dbname}'...")
     cur.execute(f'CREATE DATABASE {dbname} OWNER {os.environ["POSTGRES_USER"]}')
 else:
-    print(f"Database '{dbname}' already exists.")
+    print(f"Database '{dbname}' already exists")
 cur.close()
 conn.close()
 END
@@ -45,4 +45,4 @@ if ! airflow users list | grep -q "${_AIRFLOW_WWW_USER_USERNAME:-airflow}"; then
         --email admin@example.com
 fi
 
-echo "Airflow init completed successfully."
+echo "Airflow init completed"

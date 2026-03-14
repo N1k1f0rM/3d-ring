@@ -5,10 +5,31 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
+    # "openlrm @ git+https://github.com/3DTopia/OpenLRM.git@v1.1.1",
+    "accelerate==0.27.0",
+    "diffusers>=0.37.0",
     "dvc[s3]>=3.66.1",
+    "fastapi>=0.135.1",
+    "hy3dgen>=2.0.2",
     "hydra-core>=1.3.2",
     "matplotlib>=3.10.8",
+    "mlflow>=3.10.0",
+    "opencv-python>=4.13.0.92",
+    "optimum[onnx]>=2.1.0",
     "psycopg2-binary>=2.9.11",
+    "pydantic-settings==2.2.0",
+    "tensorboard>=2.20.0",
+    "transformers>=4.57.6",
+    "uvicorn>=0.41.0",
+    "torchvision",
+    "torch==2.8.0",
+    "boto3>=1.42.19",
+    "ben2",
+    "streamlit==1.55.0",
+    "pyvista>=0.47.1",
+    "trimesh>=4.11.3",
+    "pyvistaqt>=0.11.3",
+    "plotly>=6.6.0",
 ]
 
 [dependency-groups]
@@ -69,3 +90,6 @@ exclude = [
   "dist",
   "*.egg-info",
 ]
+
+[tool.uv.sources]
+ben2 = { git = "https://github.com/PramaLLC/BEN2.git" }
