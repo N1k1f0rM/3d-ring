@@ -133,7 +133,7 @@ services:
             - driver: nvidia
               count: 1
               capabilities: [gpu]
-                
+
 
   frontend:
     build:
