@@ -28,7 +28,7 @@ AWS_DEFAULT_REGION = os.getenv("AWS_DEFAULT_REGION", "us-east-1")
 
 s3_client = boto3.client(
     "s3",
-    endpoint_url="minio:9000",
+    endpoint_url="http://minio:9000",
     aws_access_key_id=MINIO_ACCESS_KEY,
     aws_secret_access_key=MINIO_SECRET_KEY,
     config=Config(signature_version="s3v4"),
