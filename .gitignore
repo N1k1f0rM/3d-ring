@@ -47,3 +47,7 @@ src/
 train/
 
 infra/mlflow/artifacts
+
+configs/
+data/
+experiments/
