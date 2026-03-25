@@ -200,7 +200,7 @@ def generate_3d_model(prompt: str, backend_url: str = "http://localhost:8000"):
 
     try:
         response = requests.get(
-            f"{backend_url}/generate",
+            f"http://backend:8000/generate",
             params={"prompt": prompt},
             timeout=1800,  # 30 минут
         )
@@ -224,7 +224,7 @@ st.markdown(
 
 
 backend_url = st.text_input(
-    "Backend URL", value="http://localhost:8000", help="URL вашего FastAPI backend"
+    "Backend URL", value="http://backend:8000", help="URL вашего FastAPI backend"
 )
 
 

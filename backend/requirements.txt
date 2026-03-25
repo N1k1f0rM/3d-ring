@@ -1,0 +1,12 @@
+fastapi
+uvicorn[standard]
+boto3
+psycopg2-binary
+redis
+kafka-python
+python-dotenv
+Pillow
+torch
+diffusers
+hy3dgen
+python-dotenv

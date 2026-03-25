@@ -1,0 +1,8 @@
+streamlit
+requests
+websocket-client
+Pillow
+boto3
+plotly
+trimesh
+python-dotenv
