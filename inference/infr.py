@@ -60,15 +60,18 @@ def parse_s3_uri(uri: str):
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 DTYPE = torch.float16 if DEVICE == "cuda" else torch.float32
 
-SD_MODEL = "runwayml/stable-diffusion-v1-5"
+SD_MODEL = "runwayml/stable-diffusion-v1-5" #
 BEN2_MODEL = "PramaLLC/BEN2"
 HUNYUAN_MODEL = "tencent/Hunyuan3D-2"
 
-SD_STEPS = 20
-SD_GUIDANCE = 7.0
+SD_STEPS = 200
+SD_GUIDANCE = 14.0
 REFINE_FOREGROUND = False
 ADD_TEXTURE = False
 TIMEOUT_PER_STAGE = 600
+
+
+generator = torch.Generator(device=DEVICE).manual_seed(int(time.time()*1000) % 2**32)
 
 
 def log(stage: str, message: str, level: str = "INFO"):
@@ -105,6 +108,7 @@ def stage_sd_generate(prompt: str, run_id: str) -> str:
             torch_dtype=DTYPE,
             use_safetensors=True,
             local_files_only=False,
+            generator=generator
         )
         pipe = pipe.to(DEVICE)
         pipe.enable_attention_slicing()
