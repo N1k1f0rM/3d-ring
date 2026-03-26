@@ -10,3 +10,4 @@ torch
 diffusers
 hy3dgen
 python-dotenv
+prometheus-client
