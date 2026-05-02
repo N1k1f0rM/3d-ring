@@ -222,11 +222,7 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-
-backend_url = st.text_input(
-    "Backend URL", value="http://backend:8000", help="URL вашего FastAPI backend"
-)
-
+backend_url = "http://backend:8000"
 
 with st.form(key="generation_form", clear_on_submit=False):
     col1, col2 = st.columns([4, 1])

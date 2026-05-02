@@ -3,9 +3,9 @@ version: '3.8'
 services:
   minio:
     image: minio/minio:RELEASE.2025-04-22T22-12-26Z
-    command: server --console-address ":9001" /minio/data
+    command: server --address ":9000" --console-address ":9001" /minio/data
     ports:
-      - "9000:9000"
+      - "9002:9000"
       - "9001:9001"
     expose:
       - "9000"
