@@ -35,13 +35,13 @@ AI-сервис для генерации 3D-моделей колец по те
 |--------|--------|
 | **Backend** | [http://localhost:8000](http://localhost:8000) |
 | **Frontend** | [http://localhost:8501](http://localhost:8501) |
-| **PostgreSQL** | [http://localhost:5432] |
-| **MinIO (API)** | [http://localhost:9002] |
+| **PostgreSQL** | [http://localhost:5432](http://localhost:5432) |
+| **MinIO (API)** | [http://localhost:9002](http://localhost:9002) |
 | **MinIO Console** | [http://localhost:9001](http://localhost:9001) |
 | **Prometheus** | [http://localhost:9090](http://localhost:9090) |
 | **Grafana** | [http://localhost:3000](http://localhost:3000) |
-| **Node Exporter** | [http://localhost:9100/metrics] |
-| **DCGM Exporter** | [http://localhost:9400/metrics] |
+| **Node Exporter** | [http://localhost:9100/metrics](http://localhost:9100/metrics) |
+| **DCGM Exporter** | [http://localhost:9400/metrics](http://localhost:9400/metrics) |
 
 ### 🔑 Быстрый доступ
 
